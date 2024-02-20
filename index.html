@@ -9,8 +9,11 @@
 <body class="bg-zinc-900 text-white">
     
     <h1 class="relative text-center py-8 text-5xl">Speech Recognition Example</h1>
-    <button class="absolute left-[45vw] px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-700">Start Speech Recognition</button>
-
+    <button id="startButton" class="absolute left-[45vw] px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-700">Start Speech Recognition</button>
+    <div class="text-center pt-16 h-[20vh]">
+        <div id="status" class="text-xl text-semibold block"></div>
+        <div id="transcript" class="text-xl text-semibold block"></div>
+    </div>
     <script src="./index.js"></script>
 </body>
 </html>
