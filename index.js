@@ -22,7 +22,7 @@ recognition.onstart = () => {
     console.log('Speech recognition started');
 };
 
-recognition.onresult = (event) => {
+recognition.onresult = (event) => { 
     const speechToText = event.results[0][0].transcript;
     console.log('Speech recognized:', speechToText);
     const transcript = document.getElementById('transcript');
@@ -30,7 +30,7 @@ recognition.onresult = (event) => {
         transcript.innerText = 'Transcript: ' + speechToText;
     }
         // Show speak button
-        const speakButton = document.getElementById('speakButton');
+        const speakButton = document.querySelector('.hidContainer');
         if (speakButton) {
             speakButton.style.display = 'block';
         }
@@ -79,3 +79,28 @@ if (speakButton) {
 } else {
     console.error('Element with id "speakButton" not found.');
 }
+
+//initialze voice array
+const synth = window.speechSynthesis;
+let voices=[];
+const voiceSelect = document.querySelector('#voice-select')
+const getVoices = async()=>{
+    voices= await synth.getVoices(); 
+    //looping through each voices and create an option for each one
+    voices.forEach((voice)=>{
+        //creating an option element
+        const option = document.createElement("option");
+        //filling the option with voice and language
+        option.textContent = voice.name + '('+ voice.lang +')';
+        option.setAttribute('data-lang',voice.lang);
+        option.setAttribute('data-name',voice.name);
+        voiceSelect.appendChild(option)
+
+    })
+}
+getVoices();
+if(synth.onvoiceschanged !==undefined)
+{
+    synth.onvoiceschanged=getVoices; 
+}
+ 
